@@ -9,11 +9,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TaggedHeaderComponent } from './tagged-header/tagged-header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TaggedTaskViewComponent } from './tagged-task-view/tagged-task-view.component';
+import { TaggedSettingViewComponent } from './tagged-setting-view/tagged-setting-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TaggedHeaderComponent
+    TaggedHeaderComponent,
+    TaggedTaskViewComponent,
+    TaggedSettingViewComponent
   ],
   imports: [
     BrowserModule,

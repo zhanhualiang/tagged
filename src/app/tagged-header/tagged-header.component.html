@@ -1,11 +1,37 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" fxLayout='row' fxLayoutAlign='space-around center'>
     <button mat-button routerLink='/'>
         <h1>TAGGER</h1>
     </button>
-    <button mat-button routerLink='/'>Tasks</button>
-    <button mat-button routerLink='/overview'>Overview</button>
-    <button mat-button routerLink='/setting'>Setting</button>
+    
+<!--  Menu show on desktop  -->
+    <div class='desktop-nav' fxLayout='row' fxShow.lt-sm='false'>
+        <button mat-button routerLink='/'>Tasks</button>
+        <button mat-button routerLink='/overview'>Overview</button>
+        <button mat-button routerLink='/setting'>Setting</button>
+    </div>
+
     <span class="spacer"></span>
-    <span class="welcome-message">Welcome, dear {{ userName }}!</span>
-    <mat-icon>account_circle</mat-icon>
+
+    <div fxLayout='row' fxShow.lt-sm='false' fxLayoutAlign='space-around center'>
+        <span class="welcome-message" fxShow.lt-sm='false'>Welcome, dear {{ userName }}!</span>
+        <mat-icon>account_circle</mat-icon>
+    </div>
+
+<!--  Menu show on mobile  -->
+    <div fxHide fxShow.lt-sm>
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item routerLink='/'>
+              <span>Tasks</span>
+            </button>
+            <button mat-menu-item routerLink='/overview'>
+              <span>Overview</span>
+            </button>
+            <button mat-menu-item routerLink='/setting'>
+              <span>Setting</span>
+            </button>
+          </mat-menu>
+    </div>
 </mat-toolbar>

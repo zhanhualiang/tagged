@@ -11,13 +11,15 @@ import { TaggedHeaderComponent } from './tagged-header/tagged-header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TaggedTaskViewComponent } from './tagged-task-view/tagged-task-view.component';
 import { TaggedSettingViewComponent } from './tagged-setting-view/tagged-setting-view.component';
+import { TaggedOverviewViewComponent } from './tagged-overview-view/tagged-overview-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TaggedHeaderComponent,
     TaggedTaskViewComponent,
-    TaggedSettingViewComponent
+    TaggedSettingViewComponent,
+    TaggedOverviewViewComponent
   ],
   imports: [
     BrowserModule,

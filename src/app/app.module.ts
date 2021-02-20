@@ -7,8 +7,10 @@ import {MatIconModule} from '@angular/material/icon';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TaggedHeaderComponent } from './tagged-header/tagged-header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+import { TaggedHeaderComponent } from './tagged-header/tagged-header.component';
 import { TaggedTaskViewComponent } from './tagged-task-view/tagged-task-view.component';
 import { TaggedSettingViewComponent } from './tagged-setting-view/tagged-setting-view.component';
 import { TaggedOverviewViewComponent } from './tagged-overview-view/tagged-overview-view.component';
@@ -25,6 +27,7 @@ import { TaggedOverviewViewComponent } from './tagged-overview-view/tagged-overv
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FlexLayoutModule,
     MatToolbarModule,
     MatButtonModule,
     MatIconModule

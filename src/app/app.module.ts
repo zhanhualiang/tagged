@@ -17,6 +17,8 @@ import { TaggedTaskViewComponent } from './tagged-task-view/tagged-task-view.com
 import { TaggedSettingViewComponent } from './tagged-setting-view/tagged-setting-view.component';
 import { TaggedOverviewViewComponent } from './tagged-overview-view/tagged-overview-view.component';
 import { TaggedTodayTabComponent } from './tagged-today-tab/tagged-today-tab.component';
+import { TaskListComponent } from './tab/task-list/task-list.component';
+import { TabHeaderComponent } from './tab/tab-header/tab-header.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { TaggedTodayTabComponent } from './tagged-today-tab/tagged-today-tab.com
     TaggedTaskViewComponent,
     TaggedSettingViewComponent,
     TaggedOverviewViewComponent,
-    TaggedTodayTabComponent
+    TaggedTodayTabComponent,
+    TaskListComponent,
+    TabHeaderComponent
   ],
   imports: [
     BrowserModule,

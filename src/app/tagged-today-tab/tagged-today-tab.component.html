@@ -3,12 +3,7 @@
         <h2>{{Date}}</h2>
         <p *ngIf="isToday">Today</p>
     </div>
-    <div class="task-list" cdkDropList (cdkDropListDropped)="drop($event)">
-        <div class="task-list-box" *ngFor="let task of todayTaskList; let i = index" cdkDrag
-            [ngClass]="task.finish ? 'task-finished' : ''">
-            <p>{{i+1}}. {{task.name}}</p>
-        </div>
-    </div>
+    <app-task-list [tasks]="todayTaskList" ></app-task-list>
     <div class="task-add-button">
         <button mat-fab color="primary">
             +

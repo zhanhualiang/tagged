@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import { Task } from '../class/task';
 
 @Component({
   selector: 'app-tagged-today-tab',
@@ -11,7 +12,7 @@ export class TaggedTodayTabComponent implements OnInit {
   Date: string = "2021-02-27";
   isToday: boolean = false;
 
-  todayTaskList = [
+  todayTaskList: Task[] = [
     {
       name: "walk the dog.",
       date: "2021-02-27",

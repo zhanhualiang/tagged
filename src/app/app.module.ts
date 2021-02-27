@@ -15,6 +15,7 @@ import { TaggedHeaderComponent } from './tagged-header/tagged-header.component';
 import { TaggedTaskViewComponent } from './tagged-task-view/tagged-task-view.component';
 import { TaggedSettingViewComponent } from './tagged-setting-view/tagged-setting-view.component';
 import { TaggedOverviewViewComponent } from './tagged-overview-view/tagged-overview-view.component';
+import { TaggedTodayTabComponent } from './tagged-today-tab/tagged-today-tab.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { TaggedOverviewViewComponent } from './tagged-overview-view/tagged-overv
     TaggedHeaderComponent,
     TaggedTaskViewComponent,
     TaggedSettingViewComponent,
-    TaggedOverviewViewComponent
+    TaggedOverviewViewComponent,
+    TaggedTodayTabComponent
   ],
   imports: [
     BrowserModule,

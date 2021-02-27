@@ -1,7 +1,17 @@
-<div fxLayout="column">
+<div fxLayout="column" fxLayoutAlign="center">
+    <div class="task-header">
+        <h2>{{Date}}</h2>
+        <p *ngIf="isToday">Today</p>
+    </div>
     <div class="task-list" cdkDropList (cdkDropListDropped)="drop($event)">
-        <div class="task-list-box" *ngFor="let task of todayTaskList; let i = index" cdkDrag>
-            {{i+1}}. {{task.name}}
+        <div class="task-list-box" *ngFor="let task of todayTaskList; let i = index" cdkDrag
+            [ngClass]="task.finish ? 'task-finished' : ''">
+            <p>{{i+1}}. {{task.name}}</p>
         </div>
+    </div>
+    <div class="task-add-button">
+        <button mat-fab color="primary">
+            +
+        </button>
     </div>
 </div>

@@ -1,1 +1,7 @@
-<p>tagged-today-tab works!</p>
+<div fxLayout="column">
+    <div class="task-list" cdkDropList (cdkDropListDropped)="drop($event)">
+        <div class="task-list-box" *ngFor="let task of todayTaskList; let i = index" cdkDrag>
+            {{i+1}}. {{task.name}}
+        </div>
+    </div>
+</div>

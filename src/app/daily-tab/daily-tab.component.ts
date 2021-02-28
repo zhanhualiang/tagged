@@ -3,11 +3,11 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { Task } from '../class/task';
 
 @Component({
-  selector: 'app-tagged-today-tab',
-  templateUrl: './tagged-today-tab.component.html',
-  styleUrls: ['./tagged-today-tab.component.css']
+  selector: 'app-daily-tab',
+  templateUrl: './daily-tab.component.html',
+  styleUrls: ['./daily-tab.component.css']
 })
-export class TaggedTodayTabComponent implements OnInit {
+export class DailyTabComponent implements OnInit {
 
   date: string = "2021-02-28";
   isToday: boolean = false;

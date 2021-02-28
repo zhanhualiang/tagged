@@ -16,7 +16,7 @@ import { TaggedHeaderComponent } from './tagged-header/tagged-header.component';
 import { TaggedTaskViewComponent } from './tagged-task-view/tagged-task-view.component';
 import { TaggedSettingViewComponent } from './tagged-setting-view/tagged-setting-view.component';
 import { TaggedOverviewViewComponent } from './tagged-overview-view/tagged-overview-view.component';
-import { TaggedTodayTabComponent } from './tagged-today-tab/tagged-today-tab.component';
+import { DailyTabComponent } from './daily-tab/daily-tab.component';
 import { TaskListComponent } from './tab/task-list/task-list.component';
 import { TabHeaderComponent } from './tab/tab-header/tab-header.component';
 
@@ -27,7 +27,7 @@ import { TabHeaderComponent } from './tab/tab-header/tab-header.component';
     TaggedTaskViewComponent,
     TaggedSettingViewComponent,
     TaggedOverviewViewComponent,
-    TaggedTodayTabComponent,
+    DailyTabComponent,
     TaskListComponent,
     TabHeaderComponent
   ],

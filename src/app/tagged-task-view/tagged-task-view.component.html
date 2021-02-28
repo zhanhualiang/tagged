@@ -1,15 +1,17 @@
 <div class="container" fxLayout="row wrap" fxLayoutAlign="space-around">
     <div fxLayout="column" fxFlex="24" fxHide.lt-sm>
-        <div id="yesterday" style="background-color: red;">
-            <p>this is yesterady block.</p>
+        <div id="yesterday">
+            <app-daily-tab [date]="yesterday" [taskList]="previousTaskList"></app-daily-tab>
         </div>
     </div>
     <div fxLayout="column" fxFlex="50" fxFlex.lt-sm="95">
-        <app-daily-tab></app-daily-tab>
+        <div id="today">
+            <app-daily-tab [date]="date" [taskList]="mainTaskList"></app-daily-tab>
+        </div>
     </div>
     <div fxLayout="column" fxFlex="24" fxHide.lt-sm>
-        <div id="tomorrow" style="background-color: blue;">
-            <p>this is tomorrow block.</p>
+        <div id="tomorrow">
+            <app-daily-tab [date]="tomorrow" [taskList]="nextTaskList"></app-daily-tab>
         </div>
     </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { Task } from '../class/task';
 
@@ -8,35 +8,34 @@ import { Task } from '../class/task';
   styleUrls: ['./daily-tab.component.css']
 })
 export class DailyTabComponent implements OnInit {
+  @Input('date') inputDate? : string;
+  @Input('taskList') inputTaskList? : Task[];
 
-  date: string = "2021-02-28";
+  date: string = "";
   isToday: boolean = false;
+  hasTask: boolean = false;
 
-  todayTaskList: Task[] = [
-    {
-      name: "walk the dog.",
-      date: "2021-02-27",
-      finish: true
-    },
-    {
-      name: "call mum.",
-      date: "2021-02-27",
-      finish: false
-    },
-    {
-      name: "play PUBG.",
-      date: "2021-02-27",
-      finish: false
+  todayTaskList: Task[] = []
+
+  constructor() { }
+
+  ngOnInit(): void { 
+    if(this.inputDate) {
+      this.date = this.inputDate;
     }
-  ]
 
-  constructor() { 
+    if(this.inputTaskList) {
+      this.todayTaskList = this.inputTaskList;
+      if(this.todayTaskList.length !== 0) {
+        this.hasTask = true;
+      }
+    }
+
     if(this.date == this.getCurrentDate()) {
       this.isToday = true;
-    }
-  }
 
-  ngOnInit(): void {  }
+    }
+   }
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.todayTaskList, event.previousIndex, event.currentIndex);
@@ -44,6 +43,10 @@ export class DailyTabComponent implements OnInit {
 
   getCurrentDate() {
     return new Date().toISOString().split('T')[0];
+  }
+
+  isBeforeToday(day: string) {
+    return new Date(day).valueOf() < new Date(this.getCurrentDate()).valueOf();
   }
 
 }

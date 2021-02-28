@@ -9,7 +9,7 @@ import { Task } from '../class/task';
 })
 export class TaggedTodayTabComponent implements OnInit {
 
-  Date: string = "2021-02-27";
+  date: string = "2021-02-28";
   isToday: boolean = false;
 
   todayTaskList: Task[] = [
@@ -31,7 +31,7 @@ export class TaggedTodayTabComponent implements OnInit {
   ]
 
   constructor() { 
-    if(this.Date == this.getCurrentDate()) {
+    if(this.date == this.getCurrentDate()) {
       this.isToday = true;
     }
   }

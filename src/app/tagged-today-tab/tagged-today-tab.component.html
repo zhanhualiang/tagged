@@ -1,8 +1,5 @@
 <div fxLayout="column" fxLayoutAlign="center">
-    <div class="task-header">
-        <h2>{{Date}}</h2>
-        <p *ngIf="isToday">Today</p>
-    </div>
+    <app-tab-header [date]="date"></app-tab-header>
     <app-task-list [tasks]="todayTaskList" ></app-task-list>
     <div class="task-add-button">
         <button mat-fab color="primary">

@@ -3,6 +3,7 @@
     border: solid 1px #ccc;
     border-radius: 4px;
     margin-bottom: 20px;
+    width: 95%;
 }
 
 .task-finished {

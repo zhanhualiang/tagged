@@ -10,6 +10,7 @@ import { Task } from '../class/task';
 export class DailyTabComponent implements OnInit {
   @Input('date') inputDate? : string;
   @Input('taskList') inputTaskList? : Task[];
+  //next: child to parent data sharing.
 
   date: string = "";
   isToday: boolean = false;

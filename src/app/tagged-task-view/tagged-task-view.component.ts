@@ -4,12 +4,12 @@ import { Task } from '../class/task';
 @Component({
   selector: 'app-tagged-task-view',
   templateUrl: './tagged-task-view.component.html',
-  styleUrls: ['./tagged-task-view.component.css']
+  styleUrls: ['./tagged-task-view.component.scss']
 })
 export class TaggedTaskViewComponent implements OnInit {
 
   yesterday: string = "";
-  date: string = "2021-02-28";
+  date: string = "2021-03-02";
   tomorrow: string = "";
 
   previousTaskList: Task[] = [

@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 @Component({
   selector: 'app-tagged-header',
   templateUrl: './tagged-header.component.html',
-  styleUrls: ['./tagged-header.component.css']
+  styleUrls: ['./tagged-header.component.scss']
 })
 export class TaggedHeaderComponent implements OnInit {
   @Input('user-name') userName?: string = "guess";

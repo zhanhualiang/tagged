@@ -5,7 +5,7 @@ import { Task } from '../class/task';
 @Component({
   selector: 'app-daily-tab',
   templateUrl: './daily-tab.component.html',
-  styleUrls: ['./daily-tab.component.css']
+  styleUrls: ['./daily-tab.component.scss']
 })
 export class DailyTabComponent implements OnInit {
   @Input('date') inputDate? : string;

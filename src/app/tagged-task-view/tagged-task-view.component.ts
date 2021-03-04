@@ -9,7 +9,7 @@ import { Task } from '../class/task';
 export class TaggedTaskViewComponent implements OnInit {
 
   yesterday: string = "";
-  date: string = "2021-03-02";
+  date: string = "2021-03-05";
   tomorrow: string = "";
 
   previousTaskList: Task[] = [

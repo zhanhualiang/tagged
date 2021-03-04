@@ -8,4 +8,5 @@ export class Task {
         this.date = date;
         this.finish = false;
     }
+
 }

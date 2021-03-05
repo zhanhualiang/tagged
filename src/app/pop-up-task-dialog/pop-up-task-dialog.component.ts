@@ -17,6 +17,8 @@ export class PopUpTaskDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: Task, public dateService: DateService) { }
 
   ngOnInit(): void {
+    console.log("dialog:");
+    console.log(this.data);
     this.backupData.name = this.data.name;
     this.backupData.date = this.data.date;
     this.backupData.finish = this.data.finish;

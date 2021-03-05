@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { Task } from '../class/task';
 import { DateService } from '../service/date.service';
+import { OpenDialogService } from '../service/open-dialog.service';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-daily-tab',
@@ -19,7 +21,7 @@ export class DailyTabComponent implements OnInit {
 
   todayTaskList: Task[] = []
 
-  constructor(public dateService: DateService) { }
+  constructor(public dateService: DateService, private dialogService: OpenDialogService, private dialog: MatDialog) { }
 
   ngOnInit(): void { 
     if(this.inputDate) {
@@ -41,6 +43,10 @@ export class DailyTabComponent implements OnInit {
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.todayTaskList, event.previousIndex, event.currentIndex);
+  }
+
+  addTask(){
+    this.dialogService.openDialog(this.dialog,this.todayTaskList);
   }
 
 }

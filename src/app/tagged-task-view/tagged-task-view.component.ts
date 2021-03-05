@@ -15,12 +15,12 @@ export class TaggedTaskViewComponent implements OnInit {
   previousTaskList: Task[] = [
     {
       name: "walk the dog.",
-      date: "2021-02-27",
+      date: "2021-03-04",
       finish: true
     },
     {
       name: "play games.",
-      date: "2021-02-27",
+      date: "2021-03-04",
       finish: true
     },
   ];
@@ -28,17 +28,17 @@ export class TaggedTaskViewComponent implements OnInit {
   mainTaskList: Task[] = [
     {
       name: "walk the dog.",
-      date: "2021-02-27",
+      date: "2021-03-05",
       finish: true
     },
     {
       name: "call mum.",
-      date: "2021-02-27",
+      date: "2021-03-05",
       finish: false
     },
     {
       name: "play PUBG.",
-      date: "2021-02-27",
+      date: "2021-03-05",
       finish: false
     }
   ];

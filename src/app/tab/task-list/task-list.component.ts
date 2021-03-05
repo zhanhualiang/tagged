@@ -2,7 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { Task } from '../../class/task'
 import {MatDialog} from '@angular/material/dialog';
-import { PopUpTaskDialogComponent } from 'src/app/pop-up-task-dialog/pop-up-task-dialog.component';
+import { DateService } from 'src/app/service/date.service';
+import { OpenDialogService } from 'src/app/service/open-dialog.service';
 
 @Component({
   selector: 'app-task-list',
@@ -13,7 +14,7 @@ export class TaskListComponent implements OnInit {
   @Input('tasks') inputTasks?: Task[];
   tasks: Task[] = []
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, public dateService: DateService, private dialogService: OpenDialogService) { }
 
   ngOnInit(): void {
     if(this.inputTasks) {
@@ -25,21 +26,10 @@ export class TaskListComponent implements OnInit {
     moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
   }
 
-  openDialog(index: number): void {
-    const dialogRef = this.dialog.open(PopUpTaskDialogComponent, {
-      width: '50%',
-      data: this.tasks[index],
-      disableClose: true
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if(result != ""){
-        console.log(result);
-        this.tasks[index] = result;
-      } else {
-        console.log('result is empty.')
-      }
-    });
+  openTaskDialog(index: number){
+    this.dialogService.openDialog(this.dialog, this.tasks, index);
   }
+
+  
 
 }

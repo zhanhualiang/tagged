@@ -52,6 +52,9 @@ import { PopUpTaskDialogComponent } from './pop-up-task-dialog/pop-up-task-dialo
     MatInputModule,
     FormsModule
   ],
+  entryComponents: [
+    PopUpTaskDialogComponent
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

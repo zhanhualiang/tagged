@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { Task } from '../class/task';
+import { DateService } from '../service/date.service';
 
 @Component({
   selector: 'app-daily-tab',
@@ -18,7 +19,7 @@ export class DailyTabComponent implements OnInit {
 
   todayTaskList: Task[] = []
 
-  constructor() { }
+  constructor(public dateService: DateService) { }
 
   ngOnInit(): void { 
     if(this.inputDate) {
@@ -32,7 +33,7 @@ export class DailyTabComponent implements OnInit {
       }
     }
 
-    if(this.date == this.getCurrentDate()) {
+    if(this.date == this.dateService.getCurrentDate()) {
       this.isToday = true;
 
     }
@@ -40,14 +41,6 @@ export class DailyTabComponent implements OnInit {
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.todayTaskList, event.previousIndex, event.currentIndex);
-  }
-
-  getCurrentDate() {
-    return new Date().toISOString().split('T')[0];
-  }
-
-  isBeforeToday(day: string) {
-    return new Date(day).valueOf() < new Date(this.getCurrentDate()).valueOf();
   }
 
 }

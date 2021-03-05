@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Task } from '../class/task';
+import { DateService } from '../service/date.service';
 
 //export interface DialogData extends Task {}
 
@@ -13,7 +14,7 @@ export class PopUpTaskDialogComponent implements OnInit {
   backupData: Task = new Task('empty task', '2021-03-05');
 
   constructor(public dialogRef: MatDialogRef<PopUpTaskDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Task) { }
+    @Inject(MAT_DIALOG_DATA) public data: Task, public dateService: DateService) { }
 
   ngOnInit(): void {
     this.backupData.name = this.data.name;
@@ -22,6 +23,6 @@ export class PopUpTaskDialogComponent implements OnInit {
   }
 
   onNoClick(): void {
-    this.dialogRef.close(this.backupData);
+    this.dialogRef.close(this.data);
   }
 }

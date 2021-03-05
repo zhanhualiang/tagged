@@ -1,7 +1,7 @@
 <div fxLayout="column" fxLayoutAlign="center">
     <app-tab-header [date]="date"></app-tab-header>
     <app-task-list [tasks]="todayTaskList" *ngIf="hasTask"></app-task-list>
-    <div class="task-add-button" *ngIf="!isBeforeToday(date)">
+    <div class="task-add-button" *ngIf="!dateService.isBeforeToday(date)">
         <button mat-fab color="primary">
             +
         </button>

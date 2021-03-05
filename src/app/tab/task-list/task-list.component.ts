@@ -28,7 +28,8 @@ export class TaskListComponent implements OnInit {
   openDialog(index: number): void {
     const dialogRef = this.dialog.open(PopUpTaskDialogComponent, {
       width: '50%',
-      data: this.tasks[index]
+      data: this.tasks[index],
+      disableClose: true
     });
 
     dialogRef.afterClosed().subscribe(result => {

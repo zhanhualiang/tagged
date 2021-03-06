@@ -27,7 +27,16 @@ export class TaskListComponent implements OnInit {
   }
 
   openTaskDialog(index: number){
-    this.dialogService.openDialog(this.dialog, this.tasks, index);
+    const taskDetailDialog = this.dialogService.openTaskDetailDialog(this.dialog, this.tasks, index)
+
+    taskDetailDialog.afterClosed().subscribe(result => {
+      if(result.name != ""){
+        console.log(result);
+        this.tasks[index] = result;
+      } else {
+        console.log('result is empty.')
+      }
+    });
   }
 
   

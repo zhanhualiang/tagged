@@ -8,43 +8,25 @@ import { DateService } from './date.service';
   providedIn: 'root'
 })
 export class OpenDialogService {
-
+ 
   constructor(private dateService: DateService) { }
 
-  openDialog(dialog: MatDialog, taskList?: Task[], index?: number, ): void {
-    if(index && taskList){
-      const dialogRef = dialog.open(PopUpTaskDialogComponent, {
-        width: '50%',
-        data: taskList[index],
-        disableClose: true
-      });
-  
-      dialogRef.afterClosed().subscribe(result => {
-        if(result != ""){
-          console.log(result);
-          taskList[index] = result;
-        } else {
-          console.log('result is empty.')
-        }
-      });
-    } else if (!index && taskList) {
-      const dialogRef = dialog.open(PopUpTaskDialogComponent, {
-        width: '50%',
-        data: new Task('',this.dateService.getCurrentDate()),
-        disableClose: true
-      });
-  
-      dialogRef.afterClosed().subscribe(result => {
-        if(result != ""){
-          console.log(result);
-          taskList.push(result);
-        } else {
-          console.log('result is empty.')
-        }
-      });
-    } else {
-      console.log("open dialog: missing variables.")
-    }
-
+  openTaskDetailDialog(dialog: MatDialog, taskList: Task[], index: number) {
+    const dialogRef = dialog.open(PopUpTaskDialogComponent, {
+      width: '50%',
+      data: taskList[index],
+      disableClose: true
+    });
+    return dialogRef;
   }
+
+  openAddTaskDialog(dialog: MatDialog, taskList: Task[], date: string) {
+    const dialogRef = dialog.open(PopUpTaskDialogComponent, {
+      width: '50%',
+      data: new Task('',date),
+      disableClose: true
+    });
+    return dialogRef;
+  }
+
 }

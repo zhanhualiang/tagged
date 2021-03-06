@@ -30,9 +30,7 @@ export class DailyTabComponent implements OnInit {
 
     if(this.inputTaskList) {
       this.todayTaskList = this.inputTaskList;
-      if(this.todayTaskList.length !== 0) {
-        this.hasTask = true;
-      }
+      this.emptyTaskList();
     }
 
     if(this.date == this.dateService.getCurrentDate()) {
@@ -46,7 +44,25 @@ export class DailyTabComponent implements OnInit {
   }
 
   addTask(){
-    this.dialogService.openDialog(this.dialog,this.todayTaskList);
+    const addTaskDialog = this.dialogService.openAddTaskDialog(this.dialog, this.todayTaskList, this.date);
+
+    addTaskDialog.afterClosed().subscribe(result => {
+      if(result.name != ""){
+        console.log(result);
+        this.todayTaskList.push(result);
+        this.emptyTaskList();
+      } else {
+        console.log('result is empty.')
+      }
+    });
   }
 
+  emptyTaskList(){
+    if(this.todayTaskList.length !== 0) {
+      this.hasTask = true;
+    } else {
+      this.hasTask = false;
+    }
+  }
+ 
 }

@@ -3,8 +3,6 @@ import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Task } from '../class/task';
 import { DateService } from '../service/date.service';
 
-//export interface DialogData extends Task {}
-
 @Component({
   selector: 'app-pop-up-task-dialog',
   templateUrl: './pop-up-task-dialog.component.html',

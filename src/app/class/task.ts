@@ -1,12 +1,22 @@
 export class Task {
-    name: string;
+    id: number;
+    uid: number;
+    title: string;
+    desc: string;
+    taskOrder: number;
     date: string;
-    finish: boolean;
+    finish: number;
+    share: number;
 
-    constructor (name: string, date: string) {
-        this.name = name;
+    constructor (title: string, desc: string, date: string, taskOredr: number) {
+        this.id = 0;
+        this.uid = 0;
+        this.title = title;
+        this.desc = desc;
+        this.taskOrder = taskOredr;
         this.date = date;
-        this.finish = false;
+        this.finish = 0;
+        this.share = 0;
     }
 
 }

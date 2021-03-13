@@ -1,0 +1,4 @@
+{
+    "LOCALHOST": "http://localhost:3000",
+    "GET_ALL_USER": "/user/"
+}

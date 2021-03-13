@@ -9,17 +9,14 @@ import { DateService } from '../service/date.service';
   styleUrls: ['./pop-up-task-dialog.component.scss']
 })
 export class PopUpTaskDialogComponent implements OnInit {
-  backupData: Task = new Task('empty task', '2021-03-05');
+
 
   constructor(public dialogRef: MatDialogRef<PopUpTaskDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Task, public dateService: DateService) { }
 
+  backupData: Task = new Task(this.data.title, this.data.desc, this.data.date, this.data.taskOrder);
+
   ngOnInit(): void {
-    console.log("dialog:");
-    console.log(this.data);
-    this.backupData.name = this.data.name;
-    this.backupData.date = this.data.date;
-    this.backupData.finish = this.data.finish;
   }
 
   onNoClick(): void {

@@ -3,6 +3,7 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { Task } from '../class/task';
 import { DateService } from '../service/date.service';
 import { OpenDialogService } from '../service/open-dialog.service';
+import { WebService } from '../service/web.service';
 import {MatDialog} from '@angular/material/dialog';
 
 @Component({
@@ -21,7 +22,10 @@ export class DailyTabComponent implements OnInit {
 
   todayTaskList: Task[] = []
 
-  constructor(public dateService: DateService, private dialogService: OpenDialogService, private dialog: MatDialog) { }
+  constructor(public dateService: DateService, 
+              private dialogService: OpenDialogService, 
+              private dialog: MatDialog, 
+              public webService: WebService) { }
 
   ngOnInit(): void { 
     if(this.inputDate) {
@@ -35,8 +39,11 @@ export class DailyTabComponent implements OnInit {
 
     if(this.date == this.dateService.getCurrentDate()) {
       this.isToday = true;
-
     }
+
+    this.webService.testConnection().subscribe((data) => {
+      console.log(data);
+    })
    }
 
   drop(event: CdkDragDrop<string[]>) {
@@ -45,7 +52,7 @@ export class DailyTabComponent implements OnInit {
 
   addTask(){
     //const addTaskDialog = this.dialogService.openAddTaskDialog(this.dialog, this.todayTaskList, this.date);
-    const addTaskDialog = this.dialogService.openTaskDetailDialog(this.dialog,new Task("",this.date))
+    const addTaskDialog = this.dialogService.openTaskDetailDialog(this.dialog,new Task("","",this.date,0))
 
     addTaskDialog.afterClosed().subscribe(result => {
       if(result.name != ""){

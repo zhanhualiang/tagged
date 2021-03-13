@@ -29,13 +29,13 @@ export class OpenDialogService {
     return dialogRef;
   }
 
-  openAddTaskDialog(dialog: MatDialog, taskList: Task[], date: string) {
-    const dialogRef = dialog.open(PopUpTaskDialogComponent, {
-      width: '50%',
-      data: new Task('',date),
-      disableClose: true
-    });
-    return dialogRef;
-  }
+  // openAddTaskDialog(dialog: MatDialog, taskList: Task[], date: string) {
+  //   const dialogRef = dialog.open(PopUpTaskDialogComponent, {
+  //     width: '50%',
+  //     data: new Task('',date),
+  //     disableClose: true
+  //   });
+  //   return dialogRef;
+  // }
 
 }

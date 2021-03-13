@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -50,7 +51,8 @@ import { PopUpTaskDialogComponent } from './pop-up-task-dialog/pop-up-task-dialo
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   entryComponents: [
     PopUpTaskDialogComponent

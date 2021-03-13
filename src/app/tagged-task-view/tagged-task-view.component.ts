@@ -19,32 +19,47 @@ export class TaggedTaskViewComponent implements OnInit {
 
   previousTaskList: Task[] = [
     {
-      name: "walk the dog.",
-      date: "2021-03-11",
-      finish: true
+      id: 11,
+      uid: 1,
+      title: "walk the dog",
+      desc: "",
+      taskOrder: 1,
+      date: "2021-03-12",
+      finish: 1,
+      share: 0,
     },
     {
-      name: "play games.",
-      date: "2021-03-11",
-      finish: true
+      id: 12,
+      uid: 1,
+      title: "walk the dog twice",
+      desc: "He wants it so bad!",
+      taskOrder: 2,
+      date: "2021-03-12",
+      finish: 0,
+      share: 0,
     },
   ];
 
   mainTaskList: Task[] = [
     {
-      name: "walk the dog.",
-      date: "2021-03-12",
-      finish: true
+      id: 13,
+      uid: 1,
+      title: "call Tim",
+      desc: "for moving out",
+      taskOrder: 1,
+      date: "2021-03-13",
+      finish: 0,
+      share: 0,
     },
     {
-      name: "call mum.",
-      date: "2021-03-12",
-      finish: false
-    },
-    {
-      name: "play PUBG.",
-      date: "2021-03-12",
-      finish: false
+      id: 14,
+      uid: 1,
+      title: "Play pubg.",
+      desc: "",
+      taskOrder: 2,
+      date: "2021-03-13",
+      finish: 0,
+      share: 0,
     }
   ];
 

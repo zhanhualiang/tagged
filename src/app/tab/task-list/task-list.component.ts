@@ -12,7 +12,9 @@ import { OpenDialogService } from 'src/app/service/open-dialog.service';
 })
 export class TaskListComponent implements OnInit {
   @Input('tasks') inputTasks?: Task[];
-  tasks: Task[] = []
+  @Input('date') inputDate?: string;
+  tasks: Task[] = [];
+  date: string = '';
 
   constructor(public dialog: MatDialog, public dateService: DateService, private dialogService: OpenDialogService) { }
 
@@ -20,25 +22,26 @@ export class TaskListComponent implements OnInit {
     if(this.inputTasks) {
       this.tasks = this.inputTasks;
     }
+    if(this.inputDate) {
+      this.date = this.inputDate;
+    }
   }
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
   }
 
-  openTaskDialog(index: number){
-    const taskDetailDialog = this.dialogService.openTaskDetailDialog(this.dialog, this.tasks, index)
+  openTaskDialog(task: Task){
+    const taskDetailDialog = this.dialogService.openTaskDetailDialog(this.dialog, task);
 
     taskDetailDialog.afterClosed().subscribe(result => {
       if(result.name != ""){
         console.log(result);
-        this.tasks[index] = result;
+        this.tasks[this.tasks.indexOf(task)] = result;
       } else {
         console.log('result is empty.')
       }
     });
   }
-
-  
 
 }

@@ -11,10 +11,19 @@ export class OpenDialogService {
  
   constructor(private dateService: DateService) { }
 
-  openTaskDetailDialog(dialog: MatDialog, taskList: Task[], index: number) {
+  // openTaskDetailDialog(dialog: MatDialog, taskList: Task[], index: number) {
+  //   const dialogRef = dialog.open(PopUpTaskDialogComponent, {
+  //     width: '50%',
+  //     data: taskList[index],
+  //     disableClose: true
+  //   });
+  //   return dialogRef;
+  // }
+
+  openTaskDetailDialog(dialog: MatDialog, task: Task) {
     const dialogRef = dialog.open(PopUpTaskDialogComponent, {
       width: '50%',
-      data: taskList[index],
+      data: task,
       disableClose: true
     });
     return dialogRef;

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../class/task';
+import { DateService } from '../service/date.service';
 
 @Component({
   selector: 'app-tagged-task-view',
@@ -8,19 +9,23 @@ import { Task } from '../class/task';
 })
 export class TaggedTaskViewComponent implements OnInit {
 
+
+  constructor(public dateService: DateService) { }
+
+
   yesterday: string = "";
-  date: string = "2021-03-05";
+  date: string = this.dateService.getCurrentDate();
   tomorrow: string = "";
 
   previousTaskList: Task[] = [
     {
       name: "walk the dog.",
-      date: "2021-03-04",
+      date: "2021-03-11",
       finish: true
     },
     {
       name: "play games.",
-      date: "2021-03-04",
+      date: "2021-03-11",
       finish: true
     },
   ];
@@ -28,40 +33,26 @@ export class TaggedTaskViewComponent implements OnInit {
   mainTaskList: Task[] = [
     {
       name: "walk the dog.",
-      date: "2021-03-05",
+      date: "2021-03-12",
       finish: true
     },
     {
       name: "call mum.",
-      date: "2021-03-05",
+      date: "2021-03-12",
       finish: false
     },
     {
       name: "play PUBG.",
-      date: "2021-03-05",
+      date: "2021-03-12",
       finish: false
     }
   ];
 
   nextTaskList: Task[] = [];
 
-  constructor() { }
-
   ngOnInit(): void {
-    this.yesterday = this.getPreviousDate(this.date);
-    this.tomorrow = this.getNextDate(this.date);
-  }
-
-  getCurrentDate() {
-    return new Date().toISOString().split('T')[0];
-  }
-
-  getPreviousDate(day: string) {
-    return new Date(new Date(day).getTime() - 864e5).toISOString().split('T')[0];
-  }
-
-  getNextDate(day: string) {
-    return new Date(new Date(day).getTime() + 864e5).toISOString().split('T')[0];
+    this.yesterday = this.dateService.getPreviousDate(this.date);
+    this.tomorrow = this.dateService.getNextDate(this.date);
   }
 
 }

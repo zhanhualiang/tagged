@@ -23,9 +23,6 @@ export class TaskListComponent implements OnInit {
               private webService: WebService) { }
 
   ngOnInit(): void {
-    if(this.inputTasks) {
-      this.tasks = this.inputTasks;
-    }
     if(this.inputDate) {
       this.date = this.inputDate;
     }
@@ -33,6 +30,12 @@ export class TaskListComponent implements OnInit {
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.inputTasks, event.previousIndex, event.currentIndex);
+    this.inputTasks.forEach((task, index) => {
+      task.task_order = index+1;
+      this.webService.updateTaskOrder(task).subscribe( result => {
+        console.log(result);
+      })
+    });
   }
 
   openTaskDialog(task: Task){

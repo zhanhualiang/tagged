@@ -44,6 +44,16 @@ export class WebService {
     );
   }
 
+  updateTaskOrder(task: Task) {
+    const body = {
+      taskOrder: task.task_order,
+    }
+
+    return this.http.patch<Task>(url.LOCALHOST + url.TASK + url.UPDATE + url.ORDER + task.id + '/', body).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   mapRespondIntoList(data: Task[]) {
     var result: Task[] = [];
     data.forEach(task => {
@@ -65,7 +75,7 @@ export class WebService {
       // The response body may contain clues as to what went wrong.
       console.error(
         `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
+        `body was: `);
       console.error(error)
     }
     // Return an observable with a user-facing error message.

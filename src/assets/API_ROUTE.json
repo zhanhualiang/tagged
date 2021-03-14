@@ -3,5 +3,6 @@
     "USER": "user/",
     "TASK": "task/",
     "ADD": "add/",
-    "UPDATE": "update/"
+    "UPDATE": "update/",
+    "ORDER": "order/"
 }

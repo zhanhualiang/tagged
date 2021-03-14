@@ -14,9 +14,11 @@ export class PopUpTaskDialogComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<PopUpTaskDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Task, public dateService: DateService) { }
 
-  backupData: Task = new Task(this.data.title, this.data.desc, this.data.date, this.data.taskOrder);
+  backupData: Task = new Task(this.data.uid, this.data.title, this.data.description, this.data.date, this.data.task_order);
+
 
   ngOnInit(): void {
+    this.backupData.id = this.data.id;
   }
 
   onNoClick(): void {

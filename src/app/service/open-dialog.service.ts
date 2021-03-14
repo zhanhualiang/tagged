@@ -23,6 +23,7 @@ export class OpenDialogService {
   openTaskDetailDialog(dialog: MatDialog, task: Task) {
     const dialogRef = dialog.open(PopUpTaskDialogComponent, {
       width: '50%',
+      minWidth: '350px',
       data: task,
       disableClose: true
     });

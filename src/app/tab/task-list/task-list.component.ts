@@ -4,6 +4,7 @@ import { Task } from '../../class/task'
 import {MatDialog} from '@angular/material/dialog';
 import { DateService } from 'src/app/service/date.service';
 import { OpenDialogService } from 'src/app/service/open-dialog.service';
+import { WebService } from 'src/app/service/web.service';
 
 @Component({
   selector: 'app-task-list',
@@ -11,12 +12,15 @@ import { OpenDialogService } from 'src/app/service/open-dialog.service';
   styleUrls: ['./task-list.component.scss']
 })
 export class TaskListComponent implements OnInit {
-  @Input('tasks') inputTasks?: Task[];
-  @Input('date') inputDate?: string;
+  @Input('tasks') inputTasks!: Task[];
+  @Input('date') inputDate!: string;
   tasks: Task[] = [];
   date: string = '';
 
-  constructor(public dialog: MatDialog, public dateService: DateService, private dialogService: OpenDialogService) { }
+  constructor(public dialog: MatDialog, 
+              public dateService: DateService, 
+              private dialogService: OpenDialogService, 
+              private webService: WebService) { }
 
   ngOnInit(): void {
     if(this.inputTasks) {
@@ -28,15 +32,20 @@ export class TaskListComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.inputTasks, event.previousIndex, event.currentIndex);
   }
 
   openTaskDialog(task: Task){
     const taskDetailDialog = this.dialogService.openTaskDetailDialog(this.dialog, task);
 
-    taskDetailDialog.afterClosed().subscribe(result => {
-      if(result.name != ""){
-        console.log(result);
+    taskDetailDialog.afterClosed().subscribe((result: Task) => {
+      if(result.title != ""){
+        if(result.title !== task.title || result.description !== task.description || result.task_order !== task.task_order) {
+          console.log(result.id);
+          this.webService.updateTask(result).subscribe( updateTask => {
+            console.log(updateTask);
+          });
+        }
         this.tasks[this.tasks.indexOf(task)] = result;
       } else {
         console.log('result is empty.')

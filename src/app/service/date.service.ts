@@ -7,8 +7,13 @@ export class DateService {
 
   constructor() { }
 
+  reformatDateStringArray(date: string[]) {
+    return date[2]+'-'+date[1]+'-'+date[0];
+  }
+
   getCurrentDate() {
-    return new Date().toISOString().split('T')[0];
+    const today = new Date().toLocaleDateString().split('/');
+    return this.reformatDateStringArray(today);
   }
 
   isBeforeToday(day: string) {
@@ -16,10 +21,12 @@ export class DateService {
   }
 
   getPreviousDate(day: string) {
-    return new Date(new Date(day).getTime() - 864e5).toISOString().split('T')[0];
+    const previousDay = new Date(new Date(day).getTime() - 864e5).toLocaleDateString().split('/');
+    return this.reformatDateStringArray(previousDay);
   }
 
   getNextDate(day: string) {
-    return new Date(new Date(day).getTime() + 864e5).toISOString().split('T')[0];
+    const nextDay = new Date(new Date(day).getTime() + 864e5).toLocaleDateString().split('/');
+    return this.reformatDateStringArray(nextDay);
   }
 }

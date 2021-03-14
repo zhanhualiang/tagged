@@ -1,4 +1,7 @@
 {
-    "LOCALHOST": "http://localhost:3000",
-    "GET_ALL_USER": "/user/"
+    "LOCALHOST": "http://localhost:3000/",
+    "USER": "user/",
+    "TASK": "task/",
+    "ADD": "add/",
+    "UPDATE": "update/"
 }

@@ -37,6 +37,7 @@ export class WebService {
       desc: task.description,
       taskOrder: task.task_order,
       share: task.share,
+      finish: task.finish
     }
 
     return this.http.patch<Task>(url.LOCALHOST + url.TASK + url.UPDATE + task.id + '/', body).pipe(
@@ -54,13 +55,13 @@ export class WebService {
     );
   }
 
-  deleteTask(task: Task) {
+  deleteTask(id: number) {
     const body = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       }),
       body: {
-        id: task.id
+        taskId: id
       }
     }
     return this.http.delete(url.LOCALHOST + url.TASK + url.DELETE, body).pipe(

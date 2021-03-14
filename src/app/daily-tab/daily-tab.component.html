@@ -1,6 +1,6 @@
 <div fxLayout="column" fxLayoutAlign="center">
     <app-tab-header [date]="date"></app-tab-header>
-    <app-task-list [tasks]="todayTaskList" *ngIf="hasTask"></app-task-list>
+    <app-task-list [tasks]="todayTaskList" *ngIf="hasTask" (refreshTasksRequest)="refreshTodayTasksList(uid,date)"></app-task-list>
     <p *ngIf="!hasTask&&!dateService.isBeforeToday(date)" style="text-align: center;">Click "+" below to add task for the day!</p>
     <p *ngIf="!hasTask&&dateService.isBeforeToday(date)" style="text-align: center;">No task has been added for this day.</p>
     <div class="task-add-button" *ngIf="!dateService.isBeforeToday(date)">

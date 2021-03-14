@@ -1,6 +1,6 @@
 <div class="task-list" cdkDropList (cdkDropListDropped)="drop($event)">
     <div class="task-list-box" *ngFor="let task of inputTasks; let i = index" cdkDrag
-        [ngClass]="task.finish ? 'task-finished' : ''" (click)="openTaskDialog(task)">
+        [ngClass]="task.finish == 1? 'task-finished' : ''" (click)="openTaskDialog(task)">
         <p>{{i+1}}. {{task.title}}</p>
     </div>
 </div>

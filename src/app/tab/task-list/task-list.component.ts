@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { Task } from '../../class/task'
 import {MatDialog} from '@angular/material/dialog';
@@ -14,7 +14,7 @@ import { WebService } from 'src/app/service/web.service';
 export class TaskListComponent implements OnInit {
   @Input('tasks') inputTasks!: Task[];
   @Input('date') inputDate!: string;
-  tasks: Task[] = [];
+  @Output() refreshTasksRequest = new EventEmitter();
   date: string = '';
 
   constructor(public dialog: MatDialog, 
@@ -40,20 +40,28 @@ export class TaskListComponent implements OnInit {
 
   openTaskDialog(task: Task){
     const taskDetailDialog = this.dialogService.openTaskDetailDialog(this.dialog, task);
-
-    taskDetailDialog.afterClosed().subscribe((result: Task) => {
-      if(result.title != ""){
-        if(result.title !== task.title || result.description !== task.description || result.task_order !== task.task_order) {
-          console.log(result.id);
+    const taskIndex = this.inputTasks.indexOf(task);
+    taskDetailDialog.afterClosed().subscribe(result => {
+      if(result.action == "delete"){
+        this.webService.deleteTask(task.id).subscribe( response => {
+          console.log(response);
+          this.refreshTasksRequest.emit();
+        });
+      } else if(result.title != ""){
+        if(result.title !== task.title || result.description !== task.description || result.task_order !== task.task_order || result.finish !== task.finish) {
           this.webService.updateTask(result).subscribe( updateTask => {
             console.log(updateTask);
           });
         }
-        this.tasks[this.tasks.indexOf(task)] = result;
+        this.inputTasks[taskIndex] = result;
       } else {
         console.log('result is empty.')
       }
     });
+  }
+
+  checkFinish(task: Task) {
+    return task.finish == 1? true : false;
   }
 
 }

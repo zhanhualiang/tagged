@@ -1,13 +1,44 @@
+$font-size: 14px;
+
 .task-tab-detail {
     text-align: center;
+}
+
+.task-tab-content {
+    min-height: 300px;
 }
 
 .input-title {
     width: 30%;
     min-width: 200px;
+    min-height: $font-size*2;
 }
 
 .input-desc {
     width: 80%;
     min-width: 250px;
+
+    textarea {
+        font-size: $font-size;
+        min-height: $font-size*3;
+
+        @media (max-width: 600px) {
+            min-height: $font-size*6;
+        }
+    }
+}
+
+.button-positive {
+    background-color: #69f0ae;
+    margin-left: 8px;
+}
+
+.button-hesitate {
+    background-color: #ffd740;
+    margin-left: 8px;
+}
+
+.delete-confirm {
+    font-weight: 700;
+    color: red;
 }

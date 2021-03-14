@@ -12,7 +12,7 @@ import {MatDialog} from '@angular/material/dialog';
   styleUrls: ['./daily-tab.component.scss']
 })
 export class DailyTabComponent implements OnInit {
-  @Input('date') inputDate? : string;
+  @Input('date') inputDate! : string;
   //next: child to parent data sharing.
 
   date: string = "";
@@ -32,7 +32,7 @@ export class DailyTabComponent implements OnInit {
       this.date = this.inputDate;
     }
 
-    this.fetchTodayTasks(this.uid, this.date);
+    this.refreshTodayTasksList(this.uid, this.date);
 
     if(this.date == this.dateService.getCurrentDate()) {
       this.isToday = true;
@@ -44,27 +44,23 @@ export class DailyTabComponent implements OnInit {
     moveItemInArray(this.todayTaskList, event.previousIndex, event.currentIndex);
   }
 
-  fetchTodayTasks(userId: number, date: string) {
-    this.webService.getTodaysTasks(this.uid, this.date).subscribe((data) => {
-      if(data.length >0 ) {
-        this.todayTaskList = this.webService.mapRespondIntoList(data);
-      }
+  refreshTodayTasksList(userId: number, date: string) {
+    this.webService.getTodaysTasks(userId, date).subscribe((data) => {
+      this.todayTaskList = this.webService.mapRespondIntoList(data);
       this.emptyTaskList();
       console.log(this.todayTaskList);
     });
   }
 
   addTask(){
-    //const addTaskDialog = this.dialogService.openAddTaskDialog(this.dialog, this.todayTaskList, this.date);
     const addTaskDialog = this.dialogService.openTaskDetailDialog(this.dialog,new Task(this.uid,"","",this.date,this.todayTaskList.length+1))
 
     addTaskDialog.afterClosed().subscribe(result => {
+      console.log(result);
       if(result.title != ""){
-        console.log(result);
         this.webService.postTask(result).subscribe( task => {
           console.log(task);
-          this.fetchTodayTasks(this.uid, this.date);
-          //this.todayTaskList.push(task);
+          this.refreshTodayTasksList(this.uid, this.date)
         });
       } else {
         console.log('result is empty.')

@@ -4,5 +4,6 @@
     "TASK": "task/",
     "ADD": "add/",
     "UPDATE": "update/",
-    "ORDER": "order/"
+    "ORDER": "order/",
+    "DELETE": "delete/"
 }

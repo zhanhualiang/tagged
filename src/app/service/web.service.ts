@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as url from 'src/assets/API_ROUTE.json'
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Task } from '../class/task';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -52,6 +52,20 @@ export class WebService {
     return this.http.patch<Task>(url.LOCALHOST + url.TASK + url.UPDATE + url.ORDER + task.id + '/', body).pipe(
       catchError(this.handleError)
     );
+  }
+
+  deleteTask(task: Task) {
+    const body = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: {
+        id: task.id
+      }
+    }
+    return this.http.delete(url.LOCALHOST + url.TASK + url.DELETE, body).pipe(
+      catchError(this.handleError)
+    )
   }
 
   mapRespondIntoList(data: Task[]) {

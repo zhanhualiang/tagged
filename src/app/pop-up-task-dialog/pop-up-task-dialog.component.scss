@@ -20,7 +20,7 @@ $font-size: 14px;
 
     textarea {
         font-size: $font-size;
-        min-height: $font-size*3;
+        min-height: $font-size*6;
 
         @media (max-width: 600px) {
             min-height: $font-size*6;

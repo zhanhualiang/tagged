@@ -17,6 +17,7 @@ export class PopUpTaskDialogComponent implements OnInit {
   backupData: Task = new Task(this.data.uid, this.data.title, this.data.description, this.data.date, this.data.task_order);
   alreadyExist = this.backupData.title == "" ? false : true;
   taskStatus!: string;
+  statusColour: string = "#ffd740";
 
   ngOnInit(): void {
     this.backupData.id = this.data.id;
@@ -34,12 +35,15 @@ export class PopUpTaskDialogComponent implements OnInit {
       case 0:
         if(this.dateService.isBeforeToday(this.backupData.date)) {
           this.taskStatus = "Failed";
+          this.statusColour = "red";
         } else {
           this.taskStatus = "On Going";
+          this.statusColour = "#ffd740";
         }
         break;
       case 1:
         this.taskStatus = "Finished";
+        this.statusColour = "#69f0ae";
         break;
     }
   }

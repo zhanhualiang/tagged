@@ -7,6 +7,7 @@ export class DateService {
 
   constructor() { }
 
+  //todo: moment.js
   reformatDateStringArray(date: string[]) {
     return date[2]+'-'+date[1]+'-'+date[0];
   }

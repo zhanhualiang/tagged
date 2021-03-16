@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { Task } from '../class/task';
 import { DateService } from '../service/date.service';
 import { OpenDialogService } from '../service/open-dialog.service';
@@ -40,26 +39,36 @@ export class DailyTabComponent implements OnInit {
 
    }
 
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.todayTaskList, event.previousIndex, event.currentIndex);
-  }
+  // drop(event: CdkDragDrop<string[]>) {
+  //   moveItemInArray(this.todayTaskList, event.previousIndex, event.currentIndex);
+  // }
 
   refreshTodayTasksList(userId: number, date: string) {
     this.webService.getTodaysTasks(userId, date).subscribe((data) => {
-      this.todayTaskList = this.webService.mapRespondIntoList(data);
+      this.todayTaskList = data;
       this.emptyTaskList();
       console.log(this.todayTaskList);
     });
   }
 
   addTask(){
-    const addTaskDialog = this.dialogService.openTaskDetailDialog(this.dialog,new Task(this.uid,"","",this.date,this.todayTaskList.length+1))
+    const task: Task = {
+      uid : this.uid,
+      title : "",
+      description : "",
+      date: this.date,
+      task_order: this.todayTaskList.length+1,
+      finish: 0,
+      share: 0
+    };
+
+    const addTaskDialog = this.dialogService.openTaskDetailDialog(this.dialog,task)
 
     addTaskDialog.afterClosed().subscribe(result => {
       console.log(result);
       if(result.title != ""){
-        this.webService.postTask(result).subscribe( task => {
-          console.log(task);
+        this.webService.postTask(result).subscribe( resopnd => {
+          console.log(resopnd);
           this.refreshTodayTasksList(this.uid, this.date)
         });
       } else {

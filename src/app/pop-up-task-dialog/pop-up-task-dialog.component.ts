@@ -14,15 +14,23 @@ export class PopUpTaskDialogComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<PopUpTaskDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Task, public dateService: DateService) { }
 
-  backupData: Task = new Task(this.data.uid, this.data.title, this.data.description, this.data.date, this.data.task_order);
+  backupData: Task = {
+    id: this.data.id,
+    uid : this.data.uid,
+    title : this.data.title,
+    description : this.data.description,
+    date: this.data.date,
+    task_order: this.data.task_order,
+    finish: this.data.finish,
+    share: this.data.share
+  }
+  
+
   alreadyExist = this.backupData.title == "" ? false : true;
   taskStatus!: string;
   statusColour: string = "#ffd740";
 
   ngOnInit(): void {
-    this.backupData.id = this.data.id;
-    this.backupData.finish = this.data.finish;
-    this.backupData.share = this.data.share;
     this.checkStatus();
   }
 

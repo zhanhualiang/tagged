@@ -55,6 +55,16 @@ export class WebService {
     );
   }
 
+  updateTaskOrderInBatch(list: {id:string, task_order:string}[]){
+    const body:{taskOrderList:{id:string, task_order:string}[]} = {
+      taskOrderList: list
+    }
+
+    return this.http.patch(url.LOCALHOST + url.TASK + url.ORDER + url.UPDATE , body).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   deleteTask(id: number) {
     const body = {
       headers: new HttpHeaders({
@@ -67,18 +77,6 @@ export class WebService {
     return this.http.delete(url.LOCALHOST + url.TASK + url.DELETE, body).pipe(
       catchError(this.handleError)
     )
-  }
-
-  mapRespondIntoList(data: Task[]) {
-    var result: Task[] = [];
-    data.forEach(task => {
-      const newTask = new Task(task.uid, task.title, task.description, task.date, task.task_order);
-      newTask.id = task.id;
-      newTask.share = task.share;
-      newTask.finish = task.finish;
-      result.push(newTask);
-    });
-    return result;
   }
 
   private handleError(error: HttpErrorResponse) {

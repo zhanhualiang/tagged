@@ -30,12 +30,15 @@ export class TaskListComponent implements OnInit {
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.inputTasks, event.previousIndex, event.currentIndex);
+    const updateList:{id:string,task_order:string}[] = [];
     this.inputTasks.forEach((task, index) => {
-      task.task_order = index+1;
-      this.webService.updateTaskOrder(task).subscribe( result => {
-        console.log(result);
-      })
+      updateList.push(
+        {id:`${task.id}`,task_order:`${index+1}`}
+      )
     });
+    this.webService.updateTaskOrderInBatch(updateList).subscribe( result => {
+      console.log(result);
+    })
   }
 
   openTaskDialog(task: Task){
@@ -43,10 +46,13 @@ export class TaskListComponent implements OnInit {
     const taskIndex = this.inputTasks.indexOf(task);
     taskDetailDialog.afterClosed().subscribe(result => {
       if(result.action == "delete"){
-        this.webService.deleteTask(task.id).subscribe( response => {
-          console.log(response);
-          this.refreshTasksRequest.emit();
-        });
+        if(task.id){
+          this.webService.deleteTask(task.id).subscribe( response => {
+            console.log(response);
+            this.refreshTasksRequest.emit();
+          });
+        }
+
       } else if(result.title != ""){
         if(result.title !== task.title || result.description !== task.description || result.task_order !== task.task_order || result.finish !== task.finish) {
           this.webService.updateTask(result).subscribe( updateTask => {

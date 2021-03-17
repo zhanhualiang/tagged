@@ -4,6 +4,7 @@ import { DateService } from '../service/date.service';
 import { OpenDialogService } from '../service/open-dialog.service';
 import { WebService } from '../service/web.service';
 import {MatDialog} from '@angular/material/dialog';
+import { SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-daily-tab',
@@ -14,7 +15,7 @@ export class DailyTabComponent implements OnInit {
   @Input('date') inputDate! : string;
   //next: child to parent data sharing.
 
-  date: string = "";
+
   uid: number = 2;
   isToday: boolean = false;
   hasTask: boolean = false;
@@ -27,21 +28,18 @@ export class DailyTabComponent implements OnInit {
               public webService: WebService) { }
 
   ngOnInit(): void { 
-    if(this.inputDate) {
-      this.date = this.inputDate;
-    }
 
-    this.refreshTodayTasksList(this.uid, this.date);
+    this.refreshTodayTasksList(this.uid, this.inputDate);
 
-    if(this.date == this.dateService.getCurrentDate()) {
+    if(this.inputDate == this.dateService.getCurrentDate()) {
       this.isToday = true;
     }
 
-   }
+  }
 
-  // drop(event: CdkDragDrop<string[]>) {
-  //   moveItemInArray(this.todayTaskList, event.previousIndex, event.currentIndex);
-  // }
+  ngOnChanges(changes: SimpleChanges) {
+    this.refreshTodayTasksList(this.uid, this.inputDate);
+  }
 
   refreshTodayTasksList(userId: number, date: string) {
     this.webService.getTodaysTasks(userId, date).subscribe((data) => {
@@ -56,7 +54,7 @@ export class DailyTabComponent implements OnInit {
       uid : this.uid,
       title : "",
       description : "",
-      date: this.date,
+      date: this.inputDate,
       task_order: this.todayTaskList.length+1,
       finish: 0,
       share: 0
@@ -69,7 +67,7 @@ export class DailyTabComponent implements OnInit {
       if(result.title != ""){
         this.webService.postTask(result).subscribe( resopnd => {
           console.log(resopnd);
-          this.refreshTodayTasksList(this.uid, this.date)
+          this.refreshTodayTasksList(this.uid, this.inputDate)
         });
       } else {
         console.log('result is empty.')

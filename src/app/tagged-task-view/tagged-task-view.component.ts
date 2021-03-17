@@ -22,4 +22,17 @@ export class TaggedTaskViewComponent implements OnInit {
 
   }
 
+  nextDate() {
+    this.yesterday = this.date;
+    this.date = this.tomorrow;
+    this.tomorrow = this.dateService.getNextDate(this.tomorrow);
+    console.log(this.date);
+  }
+
+  previousDate() {
+    this.tomorrow = this.date;
+    this.date = this.yesterday;
+    this.yesterday = this.dateService.getPreviousDate(this.yesterday);
+  }
+
 }

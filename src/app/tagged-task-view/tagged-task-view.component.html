@@ -17,9 +17,13 @@
 </div>
 
 <div class="side-bar left">
-    <button (click)="previousDate()">before</button>
+    <button mat-fab (click)="previousDate()" color="primary">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
 </div>
 
 <div class="side-bar right">
-    <button (click)="nextDate()">after</button>
+    <button mat-fab (click)="nextDate()" color="primary">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
 </div>

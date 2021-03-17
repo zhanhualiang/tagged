@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Task } from '../class/task';
 import { DateService } from '../service/date.service';
@@ -32,6 +33,12 @@ export class PopUpTaskDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkStatus();
+  }
+
+  title:FormControl = new FormControl('', [Validators.required]);
+
+  getErrorMessage() {
+    return this.title.hasError('required') ? 'You must enter a value' : '';
   }
 
   onNoClick(): void {

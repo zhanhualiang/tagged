@@ -2,14 +2,17 @@
     <h3 mat-dialog-title>{{backupData.date}}</h3>
     <p [style.color] = "statusColour">{{ taskStatus }}</p>
     <div mat-dialog-content class="task-tab-content" fxLayout="column" fxLayoutAlign="space-evenly center">
-        <mat-form-field class="input-title">
+        <mat-form-field class="input-title" hintLabel="Max 80 characters" appearance="fill">
             <mat-label>Title</mat-label>
-            <input matInput [(ngModel)]="backupData.title">
+            <input matInput #title [(ngModel)]="backupData.title" placeholder="Maximum 80 letters." required>
+            <mat-error *ngIf="title.required">{{getErrorMessage()}}</mat-error>
+            <mat-hint align="end">{{title.value?.length || 0}}/80</mat-hint>
         </mat-form-field>
 
-        <mat-form-field class="input-desc">
+        <mat-form-field class="input-desc" hintLabel="Max 255 characters">
             <mat-label>Description</mat-label>
-            <textarea matInput [(ngModel)]="backupData.description"></textarea>
+            <textarea matInput [(ngModel)]="backupData.description" placeholder="Maximum 255 letters."></textarea>
+            <mat-hint align="end">{{title.value?.length || 0}}/255</mat-hint>
         </mat-form-field>
 
         <!--

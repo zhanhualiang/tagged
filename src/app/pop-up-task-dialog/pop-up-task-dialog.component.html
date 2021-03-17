@@ -1,7 +1,7 @@
 <div class="task-tab-detail" fxLayout="column" fxLayoutAlign="center">
     <h3 mat-dialog-title>{{backupData.date}}</h3>
     <p [style.color] = "statusColour">{{ taskStatus }}</p>
-    <div mat-dialog-content class="task-tab-content" fxLayout="column" fxLayoutAlign="space-around center">
+    <div mat-dialog-content class="task-tab-content" fxLayout="column" fxLayoutAlign="space-evenly center">
         <mat-form-field class="input-title">
             <mat-label>Title</mat-label>
             <input matInput [(ngModel)]="backupData.title">

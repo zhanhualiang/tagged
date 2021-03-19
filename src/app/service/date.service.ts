@@ -17,6 +17,11 @@ export class DateService {
     return this.reformatDateStringArray(today);
   }
 
+  getCurrentDay(date: string) {
+    const day = new Date(date);
+    return day.toString().split(" ")[0];
+  }
+
   isBeforeToday(day: string) {
     return new Date(day).valueOf() < new Date(this.getCurrentDate()).valueOf();
   }

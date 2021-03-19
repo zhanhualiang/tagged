@@ -45,7 +45,6 @@ export class DailyTabComponent implements OnInit {
     this.webService.getTodaysTasks(userId, date).subscribe((data) => {
       this.todayTaskList = data;
       this.emptyTaskList();
-      console.log(this.todayTaskList);
     });
   }
 

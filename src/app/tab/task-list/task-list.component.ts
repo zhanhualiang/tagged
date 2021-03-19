@@ -55,9 +55,7 @@ export class TaskListComponent implements OnInit {
 
       } else if(result.title != ""){
         if(result.title !== task.title || result.description !== task.description || result.task_order !== task.task_order || result.finish !== task.finish) {
-          this.webService.updateTask(result).subscribe( updateTask => {
-            console.log(updateTask);
-          });
+          this.webService.updateTask(result).subscribe();
         }
         this.inputTasks[taskIndex] = result;
       } else {

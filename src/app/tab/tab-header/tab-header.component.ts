@@ -12,7 +12,7 @@ export class TabHeaderComponent implements OnInit {
   isToday: boolean = false;
 
 
-  constructor(private dateService: DateService) {
+  constructor(public dateService: DateService) {
 
   }
 

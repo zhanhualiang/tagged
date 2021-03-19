@@ -1,4 +1,4 @@
 <div class="task-header">
     <h2>{{inputDate}}</h2>
-    <p *ngIf="isToday">Today</p>
+    <p>{{dateService.getCurrentDay(inputDate)}}<span *ngIf="isToday">, Today</span></p>
 </div>

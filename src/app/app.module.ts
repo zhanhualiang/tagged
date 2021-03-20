@@ -25,6 +25,7 @@ import { DailyTabComponent } from './daily-tab/daily-tab.component';
 import { TaskListComponent } from './tab/task-list/task-list.component';
 import { TabHeaderComponent } from './tab/tab-header/tab-header.component';
 import { PopUpTaskDialogComponent } from './pop-up-task-dialog/pop-up-task-dialog.component';
+import { TaggedLoginComponent } from './tagged-login/tagged-login.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { PopUpTaskDialogComponent } from './pop-up-task-dialog/pop-up-task-dialo
     DailyTabComponent,
     TaskListComponent,
     TabHeaderComponent,
-    PopUpTaskDialogComponent
+    PopUpTaskDialogComponent,
+    TaggedLoginComponent
   ],
   imports: [
     BrowserModule,

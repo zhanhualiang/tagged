@@ -8,9 +8,6 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class TaggedLoginComponent implements OnInit {
 
-  emailValue: string = "";
-  passwordValue: string = "";
-
   emailValidator: FormControl = new FormControl('', [Validators.required, Validators.email]);
   passwordValidator: FormControl = new FormControl('', [Validators.required]);
 

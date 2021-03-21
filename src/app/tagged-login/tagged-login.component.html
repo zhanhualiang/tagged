@@ -1,1 +1,17 @@
-<p>tagged-login works!</p>
+<div id="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <div id="login-form" fxFlex="50" fxFlex.lt-md="80" fxLayout="column" fxLayoutAlign="center center">
+        <div mat-dialog-content fxLayout="column" fxLayoutAlign="space-evenly center">
+            <h1>TAGGED</h1>
+            <mat-form-field class="input-title" appearance="fill">
+                <mat-label>E-mail</mat-label>
+                <input matInput #email type="email" [formControl]="emailValidator" [(ngModel)]="emailValue" required>
+                <mat-error *ngIf="emailValidator.invalid">{{getEmailErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field class="input-desc" appearance="fill">
+                <mat-label>Password</mat-label>
+                <input matInput #password type="password" [formControl]="passwordValidator" [(ngModel)]="passwordValue" required>
+                <mat-error *ngIf="passwordValidator.invalid">{{getPasswordErrorMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+</div>

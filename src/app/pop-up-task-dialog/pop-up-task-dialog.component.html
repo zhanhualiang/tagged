@@ -23,7 +23,7 @@
         -->
 
     </div>
-    <div mat-dialog-actions fxLayout="row" fxLayoutAlign="center">
+    <div mat-dialog-actions fxLayout="row" fxLayoutAlign="center center">
         <button mat-raised-button (click)="onNoClick()">Cancel</button>
         <button mat-raised-button *ngIf="!dateService.isBeforeToday(backupData.date)" [mat-dialog-close]="backupData" color="primary">Save</button>
         <button mat-raised-button *ngIf="!dateService.isBeforeToday(backupData.date) && alreadyExist" color="warn" [matMenuTriggerFor]="menu">Delete?</button>

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import * as moment from 'moment'
 
 @Injectable({
   providedIn: 'root'
@@ -13,26 +14,24 @@ export class DateService {
   }
 
   getCurrentDate() {
-    const today = new Date().toLocaleDateString().split('/');
-    return this.reformatDateStringArray(today);
+    const date = moment().format("YYYY-MM-DD");
+    return date;
   }
 
   getCurrentDay(date: string) {
-    const day = new Date(date);
-    return day.toString().split(" ")[0];
+    const day = moment(date).format("ddd");
+    return day;
   }
 
   isBeforeToday(day: string) {
-    return new Date(day).valueOf() < new Date(this.getCurrentDate()).valueOf();
+    return moment(day).isBefore(moment());
   }
 
   getPreviousDate(day: string) {
-    const previousDay = new Date(new Date(day).getTime() - 864e5).toLocaleDateString().split('/');
-    return this.reformatDateStringArray(previousDay);
+    return moment(day).subtract(1,"day").format("YYYY-MM-DD");
   }
 
   getNextDate(day: string) {
-    const nextDay = new Date(new Date(day).getTime() + 864e5).toLocaleDateString().split('/');
-    return this.reformatDateStringArray(nextDay);
+    return moment(day).add(1,"day").format("YYYY-MM-DD");
   }
 }

@@ -15,7 +15,7 @@ export class TaggedTaskViewComponent implements OnInit {
   yesterday: string = "";
   date: string = this.dateService.getCurrentDate();
   tomorrow: string = "";
-
+ 
   ngOnInit(): void {
     this.yesterday = this.dateService.getPreviousDate(this.date);
     this.tomorrow = this.dateService.getNextDate(this.date);

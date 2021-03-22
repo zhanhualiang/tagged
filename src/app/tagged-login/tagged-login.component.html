@@ -11,6 +11,6 @@
             <input matInput #password type="password" [formControl]="passwordValidator" required>
             <mat-error *ngIf="passwordValidator.invalid">{{getPasswordErrorMessage()}}</mat-error>
         </mat-form-field>
-        <button mat-raised-button color="primary">Log in</button>
+        <button mat-raised-button color="primary" (click)="login()">Log in</button>
     </div>
 </div>

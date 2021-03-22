@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthenticationService } from '../service/authentication.service'
 
 @Component({
   selector: 'app-tagged-login',
@@ -11,7 +13,7 @@ export class TaggedLoginComponent implements OnInit {
   emailValidator: FormControl = new FormControl('', [Validators.required, Validators.email]);
   passwordValidator: FormControl = new FormControl('', [Validators.required]);
 
-  constructor() { }
+  constructor(private authenticationService: AuthenticationService, private snakeBar: MatSnackBar) { }
 
   ngOnInit(): void {
   }
@@ -25,6 +27,29 @@ export class TaggedLoginComponent implements OnInit {
 
   getPasswordErrorMessage() {
     return this.passwordValidator.hasError('required') ? 'You must enter your password!' : '';
+  }
+
+  login(){
+    const info: {email:string, password:string} = {
+      email: this.emailValidator.value,
+      password: this.passwordValidator.value
+    }
+    console.log(info);
+    this.authenticationService.login(info).subscribe((result) => {
+      console.log(result);
+      if(result.status == "success" && result.jwtToken) {
+        localStorage.setItem("token",result.jwtToken);
+        this.snakeBar.open("Log in success!", "", {
+          duration: 3000,
+          horizontalPosition: "center",
+        })
+      } else {
+        this.snakeBar.open("E-mail not exist or password incorrect.", "", {
+          duration: 3000,
+          horizontalPosition: "center",
+        })
+      }
+    })
   }
 
 }

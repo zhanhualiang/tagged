@@ -1,9 +1,10 @@
 {
-    "LOCALHOST": "http://localhost:3000/",
+    "LOCALHOST": "http://192.168.2.171:3000/",
     "USER": "user/",
     "TASK": "task/",
     "ADD": "add/",
     "UPDATE": "update/",
     "ORDER": "order/",
-    "DELETE": "delete/"
+    "DELETE": "delete/",
+    "SIGN_IN": "sign-in/"
 }

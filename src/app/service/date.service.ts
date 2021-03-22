@@ -24,7 +24,7 @@ export class DateService {
   }
 
   isBeforeToday(day: string) {
-    return moment(day).isBefore(moment());
+    return moment(day).isBefore(moment(),"days");
   }
 
   getPreviousDate(day: string) {

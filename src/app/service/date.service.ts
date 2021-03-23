@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment'
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,13 +9,8 @@ export class DateService {
 
   constructor() { }
 
-  //todo: moment.js
-  reformatDateStringArray(date: string[]) {
-    return date[2]+'-'+date[1]+'-'+date[0];
-  }
-
   getCurrentDate() {
-    const date = moment().format("YYYY-MM-DD");
+    const date: string = moment().format("YYYY-MM-DD");
     return date;
   }
 

@@ -5,6 +5,8 @@ import { OpenDialogService } from '../service/open-dialog.service';
 import { WebService } from '../service/web.service';
 import {MatDialog} from '@angular/material/dialog';
 import { SimpleChanges } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-daily-tab',
@@ -12,34 +14,50 @@ import { SimpleChanges } from '@angular/core';
   styleUrls: ['./daily-tab.component.scss']
 })
 export class DailyTabComponent implements OnInit {
-  @Input('date') inputDate! : string;
+  @Input('date') inputDate! : Subject<string>;
   //next: child to parent data sharing.
 
 
-  uid: number = 2;
+  uid: number = Number(localStorage.getItem("uid"));
   isToday: boolean = false;
   hasTask: boolean = false;
+  today: string = "";
 
   todayTaskList: Task[] = []
 
   constructor(public dateService: DateService, 
               private dialogService: OpenDialogService, 
               private dialog: MatDialog, 
-              public webService: WebService) { }
+              public webService: WebService,
+              private router: Router) { }
 
   ngOnInit(): void { 
-
-    this.refreshTodayTasksList(this.uid, this.inputDate);
-
-    if(this.inputDate == this.dateService.getCurrentDate()) {
-      this.isToday = true;
+    if(!this.uid) {
+      console.log("not login");
+      this.router.navigate(['/'])
     }
 
+    console.log(this.uid)
+
+    this.inputDate.subscribe( newDate => {
+      this.refreshTodayTasksList(this.uid, newDate);
+      if(newDate == this.dateService.getCurrentDate()) {
+        this.isToday = true;
+      }
+      this.today = newDate;
+    });
+
+    // this.refreshTodayTasksList(this.uid, this.inputDate);
+
+    // if(this.inputDate == this.dateService.getCurrentDate()) {
+    //   this.isToday = true;
+    // }
+
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    this.refreshTodayTasksList(this.uid, this.inputDate);
-  }
+  // ngOnChanges(changes: SimpleChanges) {
+  //   this.refreshTodayTasksList(this.uid, this.inputDate);
+  // }
 
   refreshTodayTasksList(userId: number, date: string) {
     this.webService.getTodaysTasks(userId, date).subscribe((data) => {
@@ -53,7 +71,7 @@ export class DailyTabComponent implements OnInit {
       uid : this.uid,
       title : "",
       description : "",
-      date: this.inputDate,
+      date: this.today,
       task_order: this.todayTaskList.length+1,
       finish: 0,
       share: 0
@@ -66,7 +84,7 @@ export class DailyTabComponent implements OnInit {
       if(result.title != ""){
         this.webService.postTask(result).subscribe( resopnd => {
           console.log(resopnd);
-          this.refreshTodayTasksList(this.uid, this.inputDate)
+          this.refreshTodayTasksList(this.uid, this.today)
         });
       } else {
         console.log('result is empty.')
@@ -76,6 +94,10 @@ export class DailyTabComponent implements OnInit {
 
   emptyTaskList(){
     this.todayTaskList.length == 0 ? this.hasTask = false : this.hasTask = true;
+  }
+
+  ngOnDestroy(){
+    this.inputDate.unsubscribe();
   }
  
 }

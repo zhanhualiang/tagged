@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -27,6 +27,7 @@ import { TaskListComponent } from './tab/task-list/task-list.component';
 import { TabHeaderComponent } from './tab/tab-header/tab-header.component';
 import { PopUpTaskDialogComponent } from './pop-up-task-dialog/pop-up-task-dialog.component';
 import { TaggedLoginComponent } from './tagged-login/tagged-login.component';
+import { WebInterceptorService } from './service/web-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,7 @@ import { TaggedLoginComponent } from './tagged-login/tagged-login.component';
   entryComponents: [
     PopUpTaskDialogComponent
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: WebInterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

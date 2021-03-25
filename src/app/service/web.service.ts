@@ -12,6 +12,10 @@ export class WebService {
 
   constructor(private http: HttpClient) { }
 
+  checkToken(){
+    return localStorage.getItem("token")? localStorage.getItem("token") : false;
+  }
+
   getTodaysTasks(uid: number, date: string): Observable<Task[]> {
     return this.http.get<Task[]>(url.LOCALHOST + url.USER + uid.toString() + '/' + date);
   }

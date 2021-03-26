@@ -17,6 +17,9 @@ export class TaggedLoginComponent implements OnInit {
   constructor(private authenticationService: AuthenticationService, private snakeBar: MatSnackBar, private router: Router) { }
 
   ngOnInit(): void {
+    if(localStorage.getItem("token") && localStorage.getItem("uid")) {
+      this.router.navigate(['/tasks']);
+    }
   }
 
   getEmailErrorMessage() {
@@ -41,7 +44,7 @@ export class TaggedLoginComponent implements OnInit {
       if(result.status == "success" && result.jwtToken) {
         localStorage.setItem("token",result.jwtToken);
         localStorage.setItem("uid", result.uid!.toString());
-        this.snakeBar.open("Log in success!", "", {
+        this.snakeBar.open("Log in successfully!", "", {
           duration: 3000,
           horizontalPosition: "center",
         });

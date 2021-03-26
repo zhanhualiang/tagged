@@ -4,7 +4,6 @@ import { DateService } from '../service/date.service';
 import { OpenDialogService } from '../service/open-dialog.service';
 import { WebService } from '../service/web.service';
 import {MatDialog} from '@angular/material/dialog';
-import { SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 
@@ -47,22 +46,22 @@ export class DailyTabComponent implements OnInit {
       this.today = newDate;
     });
 
-    // this.refreshTodayTasksList(this.uid, this.inputDate);
-
-    // if(this.inputDate == this.dateService.getCurrentDate()) {
-    //   this.isToday = true;
-    // }
 
   }
 
-  // ngOnChanges(changes: SimpleChanges) {
-  //   this.refreshTodayTasksList(this.uid, this.inputDate);
-  // }
+
 
   refreshTodayTasksList(userId: number, date: string) {
     this.webService.getTodaysTasks(userId, date).subscribe((data) => {
-      this.todayTaskList = data;
-      this.emptyTaskList();
+      if(data.respond == "invalid token or token expired.") {
+        console.log("invalid token or token expired. Please log in again");
+        localStorage.removeItem("uid");
+        localStorage.removeItem("token");
+        this.router.navigate(['/'])
+      } else {
+        this.todayTaskList = data;
+        this.emptyTaskList();
+      }
     });
   }
 

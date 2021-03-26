@@ -16,7 +16,7 @@ export class WebService {
     return localStorage.getItem("token")? localStorage.getItem("token") : false;
   }
 
-  getTodaysTasks(uid: number, date: string): Observable<Task[]> {
+  getTodaysTasks(uid: number, date: string): Observable<any> {
     return this.http.get<Task[]>(url.LOCALHOST + url.USER + uid.toString() + '/' + date);
   }
 

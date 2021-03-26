@@ -7,6 +7,7 @@ import {MatDialog} from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthenticationService } from '../service/authentication.service';
 
 @Component({
   selector: 'app-daily-tab',
@@ -30,7 +31,8 @@ export class DailyTabComponent implements OnInit {
               private dialog: MatDialog, 
               public webService: WebService,
               private router: Router,
-              private snakeBar: MatSnackBar) { }
+              private snakeBar: MatSnackBar,
+              private auth: AuthenticationService) { }
 
   ngOnInit(): void { 
     if(!this.uid) {
@@ -56,14 +58,7 @@ export class DailyTabComponent implements OnInit {
   refreshTodayTasksList(userId: number, date: string) {
     this.webService.getTodaysTasks(userId, date).subscribe((data) => {
       if(data.respond == "invalid token or token expired.") {
-        console.log("invalid token or token expired. Please log in again");
-        localStorage.removeItem("uid");
-        localStorage.removeItem("token");
-        this.snakeBar.open("Token expired. Please log in again", "", {
-          duration: 3000,
-          horizontalPosition: "center",
-        });
-        this.router.navigate(['/'])
+        this.auth.tokenExpired();
       } else {
         this.todayTaskList = data;
         this.emptyTaskList();

@@ -38,7 +38,6 @@ export class TaggedLoginComponent implements OnInit {
       email: this.emailValidator.value,
       password: this.passwordValidator.value
     }
-    console.log(info);
     this.authenticationService.login(info).subscribe((result) => {
       console.log(result);
       if(result.status == "success" && result.jwtToken) {

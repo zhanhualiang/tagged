@@ -97,7 +97,10 @@ export class DailyTabComponent implements OnInit {
   }
 
   ngOnDestroy(){
-    this.inputDate.unsubscribe();
+    if(this.inputDate){
+      this.inputDate.unsubscribe();
+    }
+
   }
  
 }
